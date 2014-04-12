@@ -2,6 +2,8 @@
 
 var dir = (process.argv[2] ? require('path').resolve(process.argv[2]) : process.cwd());
 var port = process.argv[3] || 3000;
+var location = process.argv[4] || 'D:/Apache24/bin/httpd';
+
 
 var parseError = false;
 try {
@@ -21,7 +23,7 @@ console.log(
 
 //full httpd docs: http://httpd.apache.org/docs/2.4/programs/httpd.html
 var httpd = require('child_process').exec(
-'net start apache'+ /* Without sudo it fails:
+location + /* Without sudo it fails:
                          (13)Permission denied: make_sock: could not bind to address [::]:80
                          (13)Permission denied: make_sock: could not bind to address 0.0.0.0:80
                          no listening sockets available, shutting down
@@ -29,8 +31,8 @@ var httpd = require('child_process').exec(
 ' -c "DocumentRoot ' + dir  + '"' +
 ' -c "Listen '       + port + '"' +
 ' -c "AccessFileName .htaccess"'     + 
-' -c "ErrorLog /dev/stdout"'         + // send logs to terminal
-' -c "CustomLog /dev/stdout common"' +
+' -c "ErrorLog D:/Apache24/logs/pache.log"'         + // send logs to terminal
+' -c "CustomLog D:/Apache24/logs/pache.log common"' +
 ' -e info'                           + // Set LogLevel http://httpd.apache.org/docs/2.4/mod/core.html#loglevel
 
 // Without this.. "httpd: Could not reliably determine the server's fully qualified domain name, using MBP018-RWC.local for ServerName"
