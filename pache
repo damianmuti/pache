@@ -21,7 +21,7 @@ console.log(
 
 //full httpd docs: http://httpd.apache.org/docs/2.4/programs/httpd.html
 var httpd = require('child_process').exec(
-'sudo httpd -k start'+ /* Without sudo it fails:
+'net start apache'+ /* Without sudo it fails:
                          (13)Permission denied: make_sock: could not bind to address [::]:80
                          (13)Permission denied: make_sock: could not bind to address 0.0.0.0:80
                          no listening sockets available, shutting down
